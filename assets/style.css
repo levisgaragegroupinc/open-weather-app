@@ -57,8 +57,13 @@ h4 {
 }
 
 input, button {
+    color: var(--white);
     font-size: 100%;
     font-family: inherit;
+}
+
+button {
+    background-color: var(--lighterblue);
 }
 
 ul {
@@ -73,7 +78,6 @@ li {
 
 .container {
     display: flex;
-    background-color: aqua;
     padding: 1rem;
 }
 
@@ -124,13 +128,14 @@ li {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;  
+    width: 100%; 
+    color: var(--white); 
 }
 
 .card {
     width: 189px;
     height: 227px;
-    background-color: aquamarine;
+    background-color: var(--darkblue);
     margin-right: 1rem;
     margin-top: 1rem;
     padding: 0.5rem;
