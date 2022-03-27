@@ -64,6 +64,7 @@ input, button {
 
 button {
     background-color: var(--lighterblue);
+    border: none;
 }
 
 ul {
@@ -75,7 +76,6 @@ li {
     padding-top: 0.8rem;
 }
 
-
 .container {
     display: flex;
     padding: 1rem;
@@ -86,7 +86,6 @@ li {
     flex-direction: column;
     padding-right: 1rem;
     padding-bottom: 1rem;
-   
 }
 
 .weather-results-container {
@@ -140,8 +139,6 @@ li {
     margin-top: 1rem;
     padding: 0.5rem;
 }
-
-
 
 header {
     height: 60px;
