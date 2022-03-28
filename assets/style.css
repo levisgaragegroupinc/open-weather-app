@@ -56,15 +56,20 @@ h4 {
     font-size: 21px;
 }
 
-input, button {
-    color: var(--white);
+input {
     font-size: 100%;
-    font-family: inherit;
 }
 
 button {
+    /* color: var(white); */
+    font-size: 100%;
+    /* font-family: inherit; */
     background-color: var(--lighterblue);
     border: none;
+}
+
+button:hover {
+    background-color: var(--lightblue);
 }
 
 ul {

@@ -13,8 +13,8 @@
   </header>
   <div class="container">
     <div class="city-container">
-        <input type="search" placeholder="Enter search city" class="search-for-city"></input>
-        <button>Search</button>
+        <input type="search" placeholder="Enter search city" id="city-search-input"></input>
+        <button id="city-search-button">Search</button>
         <hr>
         <button>New York</button>
         <!-- Append list of favorite cities here -->
@@ -22,7 +22,8 @@
   <div class="weather-results-container">
       <div class="todays-weather-card">
         <div class="primary-card-title">
-            <h2 class="city">Atlanata (3/01/2021)</h2>
+            <h2 class="city-date"></h2>
+
             <div class="icon"></div>
         </div>
         <div class="card-list">
@@ -135,7 +136,13 @@
   </div>
 
     
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   <script src="./assets/script.js"></script>  
 </body>
 </html>
