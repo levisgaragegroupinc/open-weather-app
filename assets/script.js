@@ -9,7 +9,6 @@ var cityFavorites = document.querySelector('.city-container');
 var currentCityDate = document.querySelector('.city-date');
 
 var apiKey = myApiKeys.openWeatherApiToken;
-// var apiKey = 'f92ad4f9215ca6d1f087deb61f40e189';
 var lat;
 var lon;
 var cityName;
