@@ -106,6 +106,7 @@ li {
 }
 
 .primary-card-title {
+    display: flex;
 
 }
 

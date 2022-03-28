@@ -15,10 +15,11 @@ var cityName;
 var latLongData;
 var cityLat;
 var cityLon;
+var cityLatLonArray = [];
 // Test variables
 // lat = 46.729365;
 // lon = -117.181148;
-cityName = 'Seattle';
+// cityName = 'Seattle';
 
 
 // Test lat and long
@@ -31,18 +32,18 @@ $('#city-search-button').click(function(event){
     cityName = $(this).siblings('#city-search-input').val();
     localStorage.setItem('name', cityName);
     console.log(cityName);
-    // Remove search name from input field
+    // Remove search name from input field.
     document.getElementById('city-search-input').value = '';
-    // Append city to list
+    // Append city to list.
     var createButton = document.createElement('button');
     createButton.textContent = cityName;
     createButton.setAttribute('class', 'favorites');
     cityFavorites.appendChild(createButton);
-    // Append city to and todays date to weather card
+    // Append city to and todays date to weather card.
   
     var cityNameAndCurrentDate = cityName + ' ' + '(' + currentDate + ')' ;
     currentCityDate.textContent = cityNameAndCurrentDate;
-    
+    // call the get lat long function.
     getlatLong();
 });
 
@@ -61,20 +62,44 @@ function getlatLong() {
     })
     .then(function (data) {
         console.log(data);
-        // console.log(data[0].lon);
-        // console.log(data[0].lat);
         cityLat = data[0].lat;
         cityLon = data[0].lon;
-        console.log(cityLat);
-        console.log(cityLon);
+        // console.log(cityLat);
+        // console.log(cityLon);
+
+        // Call the getCurrentWeather function.
+        getCurrentWeather();
     })
 };
+ 
+
 // End of get lat long function.
 
+
+// Start of get current weather function.
 // https://openweathermap.org/api/one-call-api
 // Current weather API call https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&units=imperial&exclude={part}&appid={API key}
-var currentWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat +
- '&' + 'lon=' + lon + '$units=imperial&exclude=minutely,hourly,alerts&appid=' + apiKey;
+function getCurrentWeather() {
+    var inputCityLat = cityLat;
+    var inputCityLon = cityLon;
+    console.log(inputCityLat);
+    console.log(inputCityLon);
+
+    var currentWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + inputCityLat + '&' + 'lon=' + inputCityLon + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + apiKey;
+    console.log(currentWeather);
+
+    fetch(currentWeather)
+    .then(function (currentWeatherResponse) {
+        return currentWeatherResponse.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+};
+
+
+// https://api.openweathermap.org/data/2.5/onecall?lat=47.6038321&lon=-122.3300624$units=imperial&exclude=minutely,hourly,alerts&appid=f92ad4f9215ca6d1f087deb61f40e189
+
 
 // https://openweathermap.org/forecast5
 // 5-day forecast API call
