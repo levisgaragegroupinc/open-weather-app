@@ -8,7 +8,11 @@ var citySearchButton = document.querySelector('#search-for-city');
 var cityFavorites = document.querySelector('.city-container');
 var currentCityDate = document.querySelector('.city-date');
 
-var apiKey = 'f92ad4f9215ca6d1f087deb61f40e189';
+var myApiKeys;
+var openWeatherApiToken;
+
+var apiKey = myApiKeys.openWeatherApiToken;
+// var apiKey = 'f92ad4f9215ca6d1f087deb61f40e189';
 var lat;
 var lon;
 var cityName;
@@ -96,6 +100,27 @@ function getCurrentWeather() {
         console.log(data);
     })
 };
+
+
+// Traverse the response
+// data.current.clouds
+// data.current.dew_point
+// data.current.humidity
+// data.current.temp
+// data.current.uvi
+// data.current.wind_speed
+// data.current.weather[0].icon
+
+// Traverse daily
+// data.daily[0].clouds
+// data.daily[0].dew_point
+// data.daily[0].humidity
+// data.daily[0].temp
+// data.daily[0].uvi
+// data.daily[0].wind_speed
+// data.daily[0].weather[0].icon
+
+// Icon URL: http://openweathermap.org/img/wn/10d@2x.png
 
 
 // https://api.openweathermap.org/data/2.5/onecall?lat=47.6038321&lon=-122.3300624$units=imperial&exclude=minutely,hourly,alerts&appid=f92ad4f9215ca6d1f087deb61f40e189
