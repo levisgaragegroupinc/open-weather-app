@@ -25,11 +25,11 @@ $('#city-search-button').click(function(event){
     var cityNameAndCurrentDate = cityName + ' ' + '(' + currentDate + ')' ;
     currentCityDate.textContent = cityNameAndCurrentDate;
     // call the get lat long function.
-    getlatLong();
+    getlatLong(cityName, apiKey);
 });
 
 // Start of get lat long function. Geocoding API call.
-function getlatLong() {
+function getlatLong(cityName, apiKey) {
     var cityLatLong = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
     console.log(cityLatLong);
 
@@ -95,6 +95,7 @@ function getFavoriteCities() {
 
 // Start of function to print favorite cities to list.
 function printFavoriteCities() {
+
     cityFavorites.textContent = '';
     var favoriteCities = localStorage.getItem('favoriteCities');
     if (favoriteCities === null) {
@@ -115,6 +116,19 @@ function printFavoriteCities() {
 };
 // End of function to print favorites to cities list.
 
+// Listen for click on favorite cities list.
+var favoriteCityButtonClickHandler = function (event) {
+    var favoriteCityName = event.target.getAttribute('data-favorite');
+    // Append city to and todays date to weather card.
+    var cityNameAndCurrentDate = favoriteCityName + ' ' + '(' + currentDate + ')' ;
+    currentCityDate.textContent = cityNameAndCurrentDate;
+    // Call the get lat long function.
+    getlatLong(favoriteCityName, apiKey);
+};
+
+// Add event listeners.
+cityFavorites.addEventListener('click', favoriteCityButtonClickHandler);
+// End of event listeners.
 
 
 // Traverse the response
