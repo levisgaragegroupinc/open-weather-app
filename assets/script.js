@@ -2,30 +2,17 @@ var currentDateTime = moment();
 var currentDate = (currentDateTime.format('dddd MMM Do'));
 console.log(currentDate);
 
-
 // Search city
 var citySearchButton = document.querySelector('#search-for-city');
-var cityFavorites = document.querySelector('.city-container');
+var cityFavorites = document.querySelector('.city-favorites');
 var currentCityDate = document.querySelector('.city-date');
 
 // var apiKey = myApiKeys.openWeatherApiToken;
 var apiKey = 'f92ad4f9215ca6d1f087deb61f40e189'
-var lat;
-var lon;
 var cityName;
 var latLongData;
 var cityLat;
 var cityLon;
-var cityNameListArray = ['']; //empty
-// Test variables
-// lat = 46.729365;
-// lon = -117.181148;
-// cityName = 'Seattle';
-
-
-// Test lat and long
-// 46.729365
-// -117.181148
 
 // Add event listener on city search button.
 $('#city-search-button').click(function(event){
@@ -34,24 +21,14 @@ $('#city-search-button').click(function(event){
     console.log(cityName);
     // Remove search name from input field.
     document.getElementById('city-search-input').value = '';
-    // Append city to list.
-    var createButton = document.createElement('button');
-    createButton.textContent = cityName;
-    createButton.setAttribute('class', 'favorites');
-    cityFavorites.appendChild(createButton);
     // Append city to and todays date to weather card.
-  
     var cityNameAndCurrentDate = cityName + ' ' + '(' + currentDate + ')' ;
     currentCityDate.textContent = cityNameAndCurrentDate;
     // call the get lat long function.
     getlatLong();
 });
 
-
-// Start of get lat long function. 
-// United states country code 840 // https://www.iso.org/obp/ui/#search
-// https://openweathermap.org/api/geocoding-api
-// Geocoding API call
+// Start of get lat long function. Geocoding API call.
 function getlatLong() {
     var cityLatLong = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
     console.log(cityLatLong);
@@ -64,33 +41,12 @@ function getlatLong() {
         console.log(data);
         cityLat = data[0].lat;
         cityLon = data[0].lon;
-        // console.log(cityLat);
-        // console.log(cityLon);
 
         // Call the getCurrentWeather function.
         getCurrentWeather();
     })
 };
 // End of get lat long function.
-
-// Function to check retrieve local storage, check if new city is in list, if not, append and return to local storage. 
-function getFavoriteCities() {
-    var favoriteCities = localStorage.getItem('favoriteCities');
-    if (favoriteCities === null) {
-        favoriteCities = [];
-    } else {
-        favoriteCities = JSON.parse(favoriteCities);
-    } if (favoriteCities.includes(cityName)) {
-        console.log(cityName + ' already in local storage');
-        return;
-    }
-    favoriteCities.push(cityName);
-    var newfavoriteCities = JSON.stringify(favoriteCities);
-    localStorage.setItem('favoriteCities', newfavoriteCities)
-};
-
-// End of function to save city to favorite cities array in local storage.
-
 
 // Start of get current weather function.
 // https://openweathermap.org/api/one-call-api
@@ -114,6 +70,51 @@ function getCurrentWeather() {
         getFavoriteCities();
     })
 };
+
+// Function to check retrieve local storage, check if new city is in list, if not, append and return to local storage. 
+function getFavoriteCities() {
+    var favoriteCities = localStorage.getItem('favoriteCities');
+    var parsedFavoriteCities = JSON.parse(favoriteCities);
+    if (parsedFavoriteCities === null) {
+        parsedFavoriteCities = [];
+        parsedFavoriteCities.push(cityName);
+        var newfavoriteCities = JSON.stringify(parsedFavoriteCities);
+        localStorage.setItem('favoriteCities', newfavoriteCities)
+        printFavoriteCities();
+    } else if (parsedFavoriteCities.includes(cityName)) {
+        console.log(cityName + ' already in local storage');
+        printFavoriteCities();
+        } else {
+            parsedFavoriteCities.push(cityName);
+            var newfavoriteCities = JSON.stringify(parsedFavoriteCities);
+            localStorage.setItem('favoriteCities', newfavoriteCities)
+            printFavoriteCities();
+        }
+    };
+// End of function to save city to favorite cities array in local storage.
+
+// Start of function to print favorite cities to list.
+function printFavoriteCities() {
+    cityFavorites.textContent = '';
+    var favoriteCities = localStorage.getItem('favoriteCities');
+    if (favoriteCities === null) {
+        console.log('No favorite cities in local storage.');        
+    } else {
+        favoriteCities = JSON.parse(favoriteCities);
+        console.log(favoriteCities.length);
+        console.log(favoriteCities.length);
+        for (i = favoriteCities.length-1; i >= 0; i--) {
+            var createButton = document.createElement('button');
+            createButton.setAttribute('class', 'favorites');
+            createButton.setAttribute('data-favorite', favoriteCities[i]);
+            createButton.textContent = favoriteCities[i];
+            cityFavorites.appendChild(createButton);
+
+        } 
+    }  
+};
+// End of function to print favorites to cities list.
+
 
 
 // Traverse the response

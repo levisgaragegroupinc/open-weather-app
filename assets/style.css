@@ -61,18 +61,24 @@ input {
 }
 
 button {
-    /* color: var(white); */
     font-size: 100%;
-    /* font-family: inherit; */
     background-color: var(--lighterblue);
     border: none;
     height: 30px;
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 button:hover {
     background-color: var(--lightblue);
+    color: var(--white);
+}
+
+.favorites {
+    background-color: aliceblue;
+}
+
+.favorites:hover {
+    color: var(--white);
 }
 
 ul {
@@ -94,6 +100,13 @@ li {
     flex-direction: column;
     padding-right: 1rem;
     padding-bottom: 1rem;
+}
+
+.city-favorites {
+    display: flex;
+    flex-direction: column;
+    border-top: solid 1px var(--lightblue);
+    margin-top: 6px;
 }
 
 .weather-results-container {
