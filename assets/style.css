@@ -66,6 +66,9 @@ button {
     /* font-family: inherit; */
     background-color: var(--lighterblue);
     border: none;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 button:hover {

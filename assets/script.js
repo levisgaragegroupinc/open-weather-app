@@ -8,14 +8,15 @@ var citySearchButton = document.querySelector('#search-for-city');
 var cityFavorites = document.querySelector('.city-container');
 var currentCityDate = document.querySelector('.city-date');
 
-var apiKey = myApiKeys.openWeatherApiToken;
+// var apiKey = myApiKeys.openWeatherApiToken;
+var apiKey = 'f92ad4f9215ca6d1f087deb61f40e189'
 var lat;
 var lon;
 var cityName;
 var latLongData;
 var cityLat;
 var cityLon;
-var cityLatLonArray = [];
+var cityNameListArray = ['']; //empty
 // Test variables
 // lat = 46.729365;
 // lon = -117.181148;
@@ -26,11 +27,10 @@ var cityLatLonArray = [];
 // 46.729365
 // -117.181148
 
-// Add event listener on city search button, and store city to local storage.
+// Add event listener on city search button.
 $('#city-search-button').click(function(event){
     event.preventDefault();
     cityName = $(this).siblings('#city-search-input').val();
-    localStorage.setItem('name', cityName);
     console.log(cityName);
     // Remove search name from input field.
     document.getElementById('city-search-input').value = '';
@@ -71,9 +71,25 @@ function getlatLong() {
         getCurrentWeather();
     })
 };
- 
-
 // End of get lat long function.
+
+// Function to check retrieve local storage, check if new city is in list, if not, append and return to local storage. 
+function getFavoriteCities() {
+    var favoriteCities = localStorage.getItem('favoriteCities');
+    if (favoriteCities === null) {
+        favoriteCities = [];
+    } else {
+        favoriteCities = JSON.parse(favoriteCities);
+    } if (favoriteCities.includes(cityName)) {
+        console.log(cityName + ' already in local storage');
+        return;
+    }
+    favoriteCities.push(cityName);
+    var newfavoriteCities = JSON.stringify(favoriteCities);
+    localStorage.setItem('favoriteCities', newfavoriteCities)
+};
+
+// End of function to save city to favorite cities array in local storage.
 
 
 // Start of get current weather function.
@@ -94,6 +110,8 @@ function getCurrentWeather() {
     })
     .then(function (data) {
         console.log(data);
+
+        getFavoriteCities();
     })
 };
 
@@ -124,22 +142,43 @@ function getCurrentWeather() {
 
 // https://openweathermap.org/forecast5
 // 5-day forecast API call
-var fiveDayWeather = 'api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&imperial&appid=' + apiKey;
+// var fiveDayWeather = 'api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&imperial&appid=' + apiKey;
 
 
 
 
 
 // Favorite cities array
-var favoriteCitiesArray = {
-        name: '',
-        location: {
-            lat: '',
-            lon: ''
-        },
-};
-
-// Retrieve favorites from local storage
-
-
+var favoriteCitiesArray = [
+    {
+        favoriteCity: '',
+        lat: '',
+        lon: '',
+    },
+    {
+        favoriteCity: '',
+        lat: '',
+        lon: '',
+    },
+    {
+        favoriteCity: '',
+        lat: '',
+        lon: '',
+    },
+    {
+        favoriteCity: '',
+        lat: '',
+        lon: '',
+    },
+    {
+        favoriteCity: '',
+        lat: '',
+        lon: '',
+    },
+    {
+        favoriteCity: '',
+        lat: '',
+        lon: '',
+    },
+];
 
