@@ -121,7 +121,7 @@ $('#city-search-button').click(function(event){
 
 // Start of get lat long function. Geocoding API call.
 function getlatLong(cityName, apiKey) {
-    var cityLatLong = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
+    var cityLatLong = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
 
     fetch(cityLatLong)
     .then(function (latLongResponse) {
