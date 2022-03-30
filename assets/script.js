@@ -1,6 +1,21 @@
-// Declare variables.
+// Declare Time variables.
 var currentDateTime = moment();
-var currentDate = (currentDateTime.format('dddd MMM Do'));
+var currentDate = (currentDateTime.format('ddd MMM Do'));
+
+var forecastDay1 = moment().add(1, 'days');
+formatForecastDay1 = (forecastDay1.format('ddd MMM Do'));
+
+var forecastDay2 = moment().add(2, 'days');
+formatForecastDay2 = (forecastDay1.format('ddd MMM Do'));
+
+var forecastDay3 = moment().add(3, 'days');
+formatForecastDay3 = (forecastDay1.format('ddd MMM Do'));
+
+var forecastDay4 = moment().add(4, 'days');
+formatForecastDay4 = (forecastDay1.format('ddd MMM Do'));
+
+var forecastDay5 = moment().add(5, 'days');
+formatForecastDay5 = (forecastDay1.format('ddd MMM Do'));
 
 // Search and other variables.
 var citySearchButton = document.querySelector('#search-for-city');
@@ -42,6 +57,12 @@ var list16 = document.getElementById('list16');
 var list17 = document.getElementById('list17');
 var icon6 = document.getElementById('icon6');
 
+var forecast1 = document.getElementById('forecastDay1');
+var forecast2 = document.getElementById('forecastDay2');
+var forecast3 = document.getElementById('forecastDay3');
+var forecast4 = document.getElementById('forecastDay4');
+var forecast5 = document.getElementById('forecastDay5');
+
 // Variable for api response.
 var myWeatherData;
 
@@ -54,7 +75,6 @@ var cityLon;
 var degreeLabel = '°';
 var mphLabel = 'mph';
 var humdityLabel = '%';
-
 
 // Add event listener on city search button.
 $('#city-search-button').click(function(event){
@@ -71,6 +91,20 @@ $('#city-search-button').click(function(event){
     // Append city to and todays date to weather card.
     var cityNameAndCurrentDate = cityName + ' ' + '(' + currentDate + ')' ;
     currentCityDate.textContent = cityNameAndCurrentDate;
+    // Clear forecast date content
+    for (i = 1; i < 5; i++) {
+        var dateId = 'forecastDay' + [i];
+        var forecastDateItem = document.getElementById(dateId);        
+        forecastDateItem.textContent = '';
+    };
+
+    // Append forecast dates to cards
+    forecast1.append(formatForecastDay1);
+    forecast2.append(formatForecastDay2);
+    forecast3.append(formatForecastDay3);
+    forecast4.append(formatForecastDay4);
+    forecast5.append(formatForecastDay5);
+
     // call the get lat long function.
     getlatLong(cityName, apiKey);
 });
@@ -110,7 +144,6 @@ function getCurrentWeather() {
         printWeatherData();
     })
   
-
 };
 // End of get current weather function.
 
@@ -135,9 +168,9 @@ function printWeatherData() {
     uvIndex.textContent = '';
 
     // Print todays weather
-    list0.append(myWeatherData.current.temp);
-    list1.append(myWeatherData.current.wind_speed);
-    list2.append(myWeatherData.current.humidity);
+    list0.append(myWeatherData.current.temp + degreeLabel);
+    list1.append(myWeatherData.current.wind_speed + mphLabel);
+    list2.append(myWeatherData.current.humidity + humdityLabel);
     uvIndex.append(myWeatherData.current.uvi);
     
     // Set the color for the UV index
@@ -156,59 +189,37 @@ function printWeatherData() {
     icon1.src = 'https://openweathermap.org/img/wn/' + myWeatherData.current.weather[0].icon + '.png';
 
     // Five day content
-
-    // for (i = 0; i < 15; i++) {
-    //     var fiveDayListId = 'list' + [i];
-    //     var fiveDaylistItem = document.getElementById(fiveDayListId);
-    //     fiveDaylistItem.textContent = '';
-    //     fiveDaylistItem.textContent = 
-
-
     // Forecast day 1
-    var tempDay1 = myWeatherData.daily[0].temp.day + degreeLabel;
-    console.log(degreeLabel);
-    list3.append(tempDay1);
     list3.append(myWeatherData.daily[0].temp.day + degreeLabel);
-    list4.append(myWeatherData.daily[0].wind_speed);
-    list5.append(myWeatherData.daily[0].humidity);
+    list4.append(myWeatherData.daily[0].wind_speed + mphLabel);
+    list5.append(myWeatherData.daily[0].humidity + humdityLabel);
     icon2.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[0].weather[0].icon + '.png';
     // Forecast day 2
-    list6.append(myWeatherData.daily[1].temp.day);
-    list7.append(myWeatherData.daily[1].wind_speed);
-    list8.append(myWeatherData.daily[1].humidity);
+    list6.append(myWeatherData.daily[1].temp.day + degreeLabel);
+    list7.append(myWeatherData.daily[1].wind_speed + mphLabel);
+    list8.append(myWeatherData.daily[1].humidity + humdityLabel);
     icon3.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[1].weather[0].icon + '.png';
     // Forecast day 3
-    list9.append(myWeatherData.daily[2].temp.day);
-    list10.append(myWeatherData.daily[2].wind_speed);
-    list11.append(myWeatherData.daily[2].humidity);
+    list9.append(myWeatherData.daily[2].temp.day + degreeLabel);
+    list10.append(myWeatherData.daily[2].wind_speed + mphLabel);
+    list11.append(myWeatherData.daily[2].humidity + humdityLabel);
     icon4.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[2].weather[0].icon + '.png';
     // Forecast day 4
-    list12.append(myWeatherData.daily[3].temp.day);
-    list13.append(myWeatherData.daily[3].wind_speed);
-    list14.append(myWeatherData.daily[3].humidity);
+    list12.append(myWeatherData.daily[3].temp.day + degreeLabel);
+    list13.append(myWeatherData.daily[3].wind_speed + mphLabel);
+    list14.append(myWeatherData.daily[3].humidity + humdityLabel);
     icon5.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[3].weather[0].icon + '.png';
 
     // Forecast day 5
-    list15.append(myWeatherData.daily[4].temp.day);
-    list16.append(myWeatherData.daily[4].wind_speed);
-    list17.append(myWeatherData.daily[4].humidity);
+    list15.append(myWeatherData.daily[4].temp.day + degreeLabel);
+    list16.append(myWeatherData.daily[4].wind_speed + mphLabel);
+    list17.append(myWeatherData.daily[4].humidity + humdityLabel);
     icon6.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[4].weather[0].icon + '.png';
 
     // Show container
     weatherResultsContainer.setAttribute('data-visible', 'yes');
 
 };
-
-// Traverse the response
-// data.current.clouds
-// data.current.dew_point
-// data.current.humidity
-// data.current.temp
-// data.current.uvi
-// data.current.wind_speed
-// data.current.weather[0].icon
-
-
 
 // Function to retrieve local storage, check if new city is in list, if not, append and return to local storage. 
 function getFavoriteCities() {
@@ -268,71 +279,3 @@ var favoriteCityButtonClickHandler = function (event) {
 // Add event listeners.
 cityFavorites.addEventListener('click', favoriteCityButtonClickHandler);
 // End of event listeners.
-
-
-// Traverse the response
-// data.current.clouds
-// data.current.dew_point
-// data.current.humidity
-// data.current.temp
-// data.current.uvi
-// data.current.wind_speed
-// data.current.weather[0].icon
-
-// Traverse daily
-// data.daily[0].clouds
-// data.daily[0].dew_point
-// data.daily[0].humidity
-// data.daily[0].temp
-// data.daily[0].uvi
-// data.daily[0].wind_speed
-// data.daily[0].weather[0].icon
-
-// Icon URL: http://openweathermap.org/img/wn/10d@2x.png
-
-
-// https://api.openweathermap.org/data/2.5/onecall?lat=47.6038321&lon=-122.3300624$units=imperial&exclude=minutely,hourly,alerts&appid=f92ad4f9215ca6d1f087deb61f40e189
-
-
-// https://openweathermap.org/forecast5
-// 5-day forecast API call
-// var fiveDayWeather = 'api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&imperial&appid=' + apiKey;
-
-
-
-
-
-// Favorite cities array
-var favoriteCitiesArray = [
-    {
-        favoriteCity: '',
-        lat: '',
-        lon: '',
-    },
-    {
-        favoriteCity: '',
-        lat: '',
-        lon: '',
-    },
-    {
-        favoriteCity: '',
-        lat: '',
-        lon: '',
-    },
-    {
-        favoriteCity: '',
-        lat: '',
-        lon: '',
-    },
-    {
-        favoriteCity: '',
-        lat: '',
-        lon: '',
-    },
-    {
-        favoriteCity: '',
-        lat: '',
-        lon: '',
-    },
-];
-
