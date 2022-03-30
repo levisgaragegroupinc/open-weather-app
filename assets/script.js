@@ -6,16 +6,16 @@ var forecastDay1 = moment().add(1, 'days');
 formatForecastDay1 = (forecastDay1.format('ddd MMM Do'));
 
 var forecastDay2 = moment().add(2, 'days');
-formatForecastDay2 = (forecastDay1.format('ddd MMM Do'));
+formatForecastDay2 = (forecastDay2.format('ddd MMM Do'));
 
 var forecastDay3 = moment().add(3, 'days');
-formatForecastDay3 = (forecastDay1.format('ddd MMM Do'));
+formatForecastDay3 = (forecastDay3.format('ddd MMM Do'));
 
 var forecastDay4 = moment().add(4, 'days');
-formatForecastDay4 = (forecastDay1.format('ddd MMM Do'));
+formatForecastDay4 = (forecastDay4.format('ddd MMM Do'));
 
 var forecastDay5 = moment().add(5, 'days');
-formatForecastDay5 = (forecastDay1.format('ddd MMM Do'));
+formatForecastDay5 = (forecastDay5.format('ddd MMM Do'));
 
 // Search and other variables.
 var citySearchButton = document.querySelector('#search-for-city');
@@ -92,7 +92,7 @@ $('#city-search-button').click(function(event){
     var cityNameAndCurrentDate = cityName + ' ' + '(' + currentDate + ')' ;
     currentCityDate.textContent = cityNameAndCurrentDate;
     // Clear forecast date content
-    for (i = 1; i < 5; i++) {
+    for (i = 1; i < 6; i++) {
         var dateId = 'forecastDay' + [i];
         var forecastDateItem = document.getElementById(dateId);        
         forecastDateItem.textContent = '';
@@ -159,7 +159,7 @@ function printWeatherData() {
     console.log(newWeatherData.current.weather[0].icon);
     
     // Clear content
-    for (i = 0; i < 17; i++) {
+    for (i = 0; i < 18; i++) {
         var listId = 'list' + [i];
         var listItem = document.getElementById(listId);        
         listItem.textContent = '';
