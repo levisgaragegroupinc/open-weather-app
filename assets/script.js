@@ -60,6 +60,12 @@ var humdityLabel = '%';
 $('#city-search-button').click(function(event){
     event.preventDefault();
     cityName = $(this).siblings('#city-search-input').val();
+    // If search field is blank.
+    if(cityName === '') {
+        console.log("No city name entered");
+        return;
+    };
+
     // Remove search name from input field.
     document.getElementById('city-search-input').value = '';
     // Append city to and todays date to weather card.
@@ -151,6 +157,42 @@ function printWeatherData() {
 
     // Five day content
 
+    // for (i = 0; i < 15; i++) {
+    //     var fiveDayListId = 'list' + [i];
+    //     var fiveDaylistItem = document.getElementById(fiveDayListId);
+    //     fiveDaylistItem.textContent = '';
+    //     fiveDaylistItem.textContent = 
+
+
+    // Forecast day 1
+    var tempDay1 = myWeatherData.daily[0].temp.day + degreeLabel;
+    console.log(degreeLabel);
+    list3.append(tempDay1);
+    list3.append(myWeatherData.daily[0].temp.day + degreeLabel);
+    list4.append(myWeatherData.daily[0].wind_speed);
+    list5.append(myWeatherData.daily[0].humidity);
+    icon2.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[0].weather[0].icon + '.png';
+    // Forecast day 2
+    list6.append(myWeatherData.daily[1].temp.day);
+    list7.append(myWeatherData.daily[1].wind_speed);
+    list8.append(myWeatherData.daily[1].humidity);
+    icon3.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[1].weather[0].icon + '.png';
+    // Forecast day 3
+    list9.append(myWeatherData.daily[2].temp.day);
+    list10.append(myWeatherData.daily[2].wind_speed);
+    list11.append(myWeatherData.daily[2].humidity);
+    icon4.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[2].weather[0].icon + '.png';
+    // Forecast day 4
+    list12.append(myWeatherData.daily[3].temp.day);
+    list13.append(myWeatherData.daily[3].wind_speed);
+    list14.append(myWeatherData.daily[3].humidity);
+    icon5.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[3].weather[0].icon + '.png';
+
+    // Forecast day 5
+    list15.append(myWeatherData.daily[4].temp.day);
+    list16.append(myWeatherData.daily[4].wind_speed);
+    list17.append(myWeatherData.daily[4].humidity);
+    icon6.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[4].weather[0].icon + '.png';
 
     // Show container
     weatherResultsContainer.setAttribute('data-visible', 'yes');
