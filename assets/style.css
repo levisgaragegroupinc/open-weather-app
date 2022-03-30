@@ -10,7 +10,7 @@
     --white: #fff;
     --lighterblue: #5098E6;
     --lightblue: #3A2EBD;
-    --darkblue: #0A1C3D;
+    --darkblue: #2D3E50;
     --darkgreen: #157347; 
     --red: #BF1900;
     --darkyellow: #A38B02;
@@ -52,6 +52,7 @@ h4 {
 
 input {
     font-size: 100%;
+    height: 30px;
 }
 
 button {
@@ -64,6 +65,10 @@ button {
 
 button:hover {
     background-color: var(--lightblue);
+    color: var(--white);
+}
+
+.city-search-button {
     color: var(--white);
 }
 
@@ -120,14 +125,9 @@ li {
 
 }
 
-.card-list {
-
-}
-
 .list-items {
     display: flex;
     white-space: nowrap;
-
 }
 
 .five-day-forecast-container {
@@ -149,7 +149,7 @@ li {
 
 .card {
     width: 189px;
-    height: 227px;
+    height: 200px;
     background-color: var(--darkblue);
     margin-right: 1rem;
     margin-top: 1rem;
@@ -160,7 +160,7 @@ header {
     height: 60px;
     background: linear-gradient(to right, #3A2EBD, #0A1C3D);
     text-align: center;
-    padding-top: 20px;
+    padding-top: 15px;
     font-size: 1.5rem;
     color: var(--white);
 }
@@ -168,16 +168,16 @@ header {
 #uv-index {
     border-radius: 6px;
     height: 20px;
-    margin-top: 10px;
-    padding: 2px;
+    margin-top: 12px;
+    padding: 1px;
     color: var(--white);
+    text-align: center;
 }
 
 /* Dislay none, to yes */
 [data-visible="no"] {
     display: none;
 }
-
 
 /* UV Index Color Scaling
     2 or less = low = Green

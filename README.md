@@ -26,7 +26,9 @@ UV Index
 
 ### Single Page Application
 
-![openWeather](./assets/images/wx_mock_1.png)
+![openWeather](./assets/images/weather_1.png)
+
+![openWeather](./assets/images/weather_2.png)
 
 ## View the project
 

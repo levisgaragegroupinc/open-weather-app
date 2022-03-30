@@ -72,9 +72,9 @@ var cityName;
 var latLongData;
 var cityLat;
 var cityLon;
-var degreeLabel = '°';
-var mphLabel = 'mph';
-var humdityLabel = '%';
+var degreeLabel = ' °F';
+var mphLabel = ' mph';
+var humdityLabel = ' %';
 
 // Add event listener on city search button.
 $('#city-search-button').click(function(event){
@@ -85,6 +85,16 @@ $('#city-search-button').click(function(event){
         console.log("No city name entered");
         return;
     };
+    // Capitalization correction.
+    // inputCityName.toLowerCase();
+    // console.log(inputCityName);
+    // var cityName = inputCityName.split(" ");
+
+    // for (let i = 0; i < cityName.length; i++) {
+    //     cityName[i] = cityName[i][0].toUpperCase() + cityName[i].substr(1);
+    // }
+
+    // cityName.join(" ");
 
     // Remove search name from input field.
     document.getElementById('city-search-input').value = '';
