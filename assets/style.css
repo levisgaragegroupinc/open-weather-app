@@ -17,12 +17,6 @@
     --darkorange: #A3500B;
     --black: #1a1a1a;
 }
-/* UV Index Color Scaling
-    2 or less = low = Green
-    3 to 5 = moderate = Yellow
-    6 to 7 = high = Orange
-    8 to 10 = very high = Red
-*/
 
 /*Give the body element a parent element height to compare against  */
 html {
@@ -169,4 +163,40 @@ header {
     padding-top: 20px;
     font-size: 1.5rem;
     color: var(--white);
+}
+
+#uv-index {
+    border-radius: 6px;
+    height: 20px;
+    margin-top: 10px;
+    padding: 2px;
+    color: var(--white);
+}
+
+/* Dislay none, to yes */
+[data-visible="no"] {
+    display: none;
+}
+
+
+/* UV Index Color Scaling
+    2 or less = low = Green
+    3 to 5 = moderate = Yellow
+    6 to 7 = high = Orange
+    8 to 10 = very high = Red
+*/
+[data-index="indexGreen"] {
+    background-color: var(--darkgreen);
+}
+
+[data-index="indexYellow"] {
+    background-color: var(--darkyellow);
+}
+
+[data-index="indexOrange"] {
+    background-color: var(--darkorange);
+}
+
+[data-index="indexRed"] {
+    background-color: var(--red);
 }

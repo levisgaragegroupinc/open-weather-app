@@ -1,11 +1,49 @@
+// Declare variables.
 var currentDateTime = moment();
 var currentDate = (currentDateTime.format('dddd MMM Do'));
-console.log(currentDate);
 
-// Search city
+// Search and other variables.
 var citySearchButton = document.querySelector('#search-for-city');
 var cityFavorites = document.querySelector('.city-favorites');
 var currentCityDate = document.querySelector('.city-date');
+var weatherResultsContainer = document.querySelector('.weather-results-container');
+var img1 = document.querySelector('#city-data');
+
+
+// Todays weather variables.
+var list0 = document.getElementById('list0');
+var list1 = document.getElementById('list1');
+var list2 = document.getElementById('list2');
+var uvIndex = document.getElementById('uv-index');
+var icon1 = document.getElementById('icon1');
+// Five day variables.
+var list3 = document.getElementById('list3');
+var list4 = document.getElementById('list4');
+var list5 = document.getElementById('list5');
+var icon2 = document.getElementById('icon2');
+
+var list6 = document.getElementById('list6');
+var list7 = document.getElementById('list7');
+var list8 = document.getElementById('list8');
+var icon3 = document.getElementById('icon3');
+
+var list9 = document.getElementById('list9');
+var list10 = document.getElementById('list10');
+var list11 = document.getElementById('list11');
+var icon4 = document.getElementById('icon4');
+
+var list12 = document.getElementById('list12');
+var list13 = document.getElementById('list13');
+var list14 = document.getElementById('list14');
+var icon5 = document.getElementById('icon5');
+
+var list15 = document.getElementById('list15');
+var list16 = document.getElementById('list16');
+var list17 = document.getElementById('list17');
+var icon6 = document.getElementById('icon6');
+
+// Variable for api response.
+var myWeatherData;
 
 // var apiKey = myApiKeys.openWeatherApiToken;
 var apiKey = 'f92ad4f9215ca6d1f087deb61f40e189'
@@ -13,12 +51,15 @@ var cityName;
 var latLongData;
 var cityLat;
 var cityLon;
+var degreeLabel = '°';
+var mphLabel = 'mph';
+var humdityLabel = '%';
+
 
 // Add event listener on city search button.
 $('#city-search-button').click(function(event){
     event.preventDefault();
     cityName = $(this).siblings('#city-search-input').val();
-    console.log(cityName);
     // Remove search name from input field.
     document.getElementById('city-search-input').value = '';
     // Append city to and todays date to weather card.
@@ -31,14 +72,12 @@ $('#city-search-button').click(function(event){
 // Start of get lat long function. Geocoding API call.
 function getlatLong(cityName, apiKey) {
     var cityLatLong = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
-    console.log(cityLatLong);
 
     fetch(cityLatLong)
     .then(function (latLongResponse) {
         return latLongResponse.json();
     })
     .then(function (data) {
-        console.log(data);
         cityLat = data[0].lat;
         cityLon = data[0].lon;
 
@@ -49,29 +88,87 @@ function getlatLong(cityName, apiKey) {
 // End of get lat long function.
 
 // Start of get current weather function.
-// https://openweathermap.org/api/one-call-api
-// Current weather API call https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&units=imperial&exclude={part}&appid={API key}
 function getCurrentWeather() {
     var inputCityLat = cityLat;
     var inputCityLon = cityLon;
-    console.log(inputCityLat);
-    console.log(inputCityLon);
-
     var currentWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + inputCityLat + '&' + 'lon=' + inputCityLon + '&units=imperial&exclude=minutely,hourly,alerts&appid=' + apiKey;
-    console.log(currentWeather);
-
+    
     fetch(currentWeather)
     .then(function (currentWeatherResponse) {
         return currentWeatherResponse.json();
     })
-    .then(function (data) {
-        console.log(data);
-
+    .then(function (weatherData) {
+        myWeatherData = weatherData;
+        // Call get Cities and Print Weather functions.
         getFavoriteCities();
+        printWeatherData();
     })
+  
+
+};
+// End of get current weather function.
+
+// Start of print weather parameters to page function.
+function printWeatherData() {
+    var newWeatherData = myWeatherData;
+    console.log(newWeatherData);
+    console.log(newWeatherData.current.temp);
+    console.log(newWeatherData.current.wind_speed);
+    console.log(newWeatherData.current.humidity);
+    console.log(newWeatherData.current.uvi);
+    console.log(newWeatherData.current.weather[0].description);
+    console.log(newWeatherData.current.weather[0].icon);
+    
+    // Clear content
+    for (i = 0; i < 17; i++) {
+        var listId = 'list' + [i];
+        var listItem = document.getElementById(listId);        
+        listItem.textContent = '';
+    };
+
+    uvIndex.textContent = '';
+
+    // Print todays weather
+    list0.append(myWeatherData.current.temp);
+    list1.append(myWeatherData.current.wind_speed);
+    list2.append(myWeatherData.current.humidity);
+    uvIndex.append(myWeatherData.current.uvi);
+    
+    // Set the color for the UV index
+    var indexValue = myWeatherData.current.uvi;
+    if (indexValue <= 2) {
+        var scaleColor = 'indexGreen';       
+    } else if (indexValue <= 5) {
+        scaleColor = 'indexYellow';
+    } else if (indexValue <= 7) {
+        scaleColor = 'indexOrange';
+    } else {
+        scaleColor = 'indexRed';
+    };
+    
+    uvIndex.setAttribute('data-index', scaleColor);
+    icon1.src = 'https://openweathermap.org/img/wn/' + myWeatherData.current.weather[0].icon + '.png';
+
+    // Five day content
+
+
+    // Show container
+    weatherResultsContainer.setAttribute('data-visible', 'yes');
+
 };
 
-// Function to check retrieve local storage, check if new city is in list, if not, append and return to local storage. 
+// Traverse the response
+// data.current.clouds
+// data.current.dew_point
+// data.current.humidity
+// data.current.temp
+// data.current.uvi
+// data.current.wind_speed
+// data.current.weather[0].icon
+
+
+
+// Function to retrieve local storage, check if new city is in list, if not, append and return to local storage. 
 function getFavoriteCities() {
     var favoriteCities = localStorage.getItem('favoriteCities');
     var parsedFavoriteCities = JSON.parse(favoriteCities);
@@ -102,14 +199,14 @@ function printFavoriteCities() {
         console.log('No favorite cities in local storage.');        
     } else {
         favoriteCities = JSON.parse(favoriteCities);
-        console.log(favoriteCities.length);
-        console.log(favoriteCities.length);
         for (i = favoriteCities.length-1; i >= 0; i--) {
             var createButton = document.createElement('button');
             createButton.setAttribute('class', 'favorites');
             createButton.setAttribute('data-favorite', favoriteCities[i]);
             createButton.textContent = favoriteCities[i];
             cityFavorites.appendChild(createButton);
+            // Call the print weather data function.
+            // printWeatherData();
 
         } 
     }  

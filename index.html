@@ -19,10 +19,10 @@
         <!-- Append list of favorite cities here -->
         </div>  
     </div>
-  <div class="weather-results-container">
+  <div class="weather-results-container" data-visible="no">
       <div class="todays-weather-card">
         <div class="primary-card-title">
-            <h2 class="city-date"></h2><img class="icon" src="https://openweathermap.org/img/wn/04d@2x.png" height="40px" width="40px">
+            <h2 class="city-date"></h2><img id="icon1" src="" height="40px" width="40px">
 
             <div class="icon"></div>
         </div>
@@ -35,10 +35,10 @@
                     <li>UV Index:</li>
                 </ul>
                 <ul>
-                    <li>74.01°</li>
-                    <li>6.67 MPH</li>
-                    <li>46 %</li>
-                    <li class="uv-index">0.47</li>
+                    <li id="list0"></li>
+                    <li id="list1"></li>
+                    <li id="list2"></li>
+                    <li id="uv-index" data-index="default"></li>
                 </ul>   
             </div>
         </div>
@@ -48,7 +48,7 @@
           <div class="five-day-forecast-cards">
             <div class="card">
                 <h4>03/02/2021</h4>
-                <img class="icon" src="https://openweathermap.org/img/wn/04d@2x.png" height="40px" width="40px">
+                <img id="icon2" src="https://openweathermap.org/img/wn/04d@2x.png" height="40px" width="40px">
                 <div class="list-items">
                     <ul>
                         <li>Temp:</li>
@@ -56,15 +56,15 @@
                         <li>Humidity:</li>
                     </ul>
                     <ul>
-                        <li>74.01°</li>
-                        <li>6.67 MPH</li>
-                        <li>46 %</li>
+                        <li id="list3"></li>
+                        <li id="list4"></li>
+                        <li id="list5"></li>
                     </ul>     
                 </div>
             </div>
             <div class="card">
                 <h4>03/02/2021</h4>
-                <img src="" class="icon">
+                <img src="" id="icon3">
                 <div class="list-items">
                     <ul>
                         <li>Temp:</li>
@@ -72,15 +72,15 @@
                         <li>Humidity:</li>
                     </ul>
                     <ul>
-                        <li>74.01°</li>
-                        <li>6.67 MPH</li>
-                        <li>46 %</li>
+                        <li id="list6"></li>
+                        <li id="list7"></li>
+                        <li id="list8"></li>
                     </ul>     
                 </div>
             </div>
             <div class="card">
                 <h4>03/02/2021</h4>
-                <img src="" class="icon">
+                <img src="" id="icon4">
                 <div class="list-items">
                     <ul>
                         <li>Temp:</li>
@@ -88,15 +88,15 @@
                         <li>Humidity:</li>
                     </ul>
                     <ul>
-                        <li>74.01°</li>
-                        <li>6.67 MPH</li>
-                        <li>46 %</li>
+                        <li id="list9"></li>
+                        <li id="list10"></li>
+                        <li id="list11"></li>
                     </ul>     
                 </div>
             </div>
             <div class="card">
                 <h4>03/02/2021</h4>
-                <img src="" class="icon">
+                <img src="" id="icon5">
                 <div class="list-items">
                     <ul>
                         <li>Temp:</li>
@@ -104,15 +104,15 @@
                         <li>Humidity:</li>
                     </ul>
                     <ul>
-                        <li>74.01°</li>
-                        <li>6.67 MPH</li>
-                        <li>46 %</li>
+                        <li id="list12"></li>
+                        <li id="list13"></li>
+                        <li id="list14"></li>
                     </ul>     
                 </div>
             </div>
             <div class="card">
                 <h4>03/02/2021</h4>
-                <img src="" class="icon">
+                <img src="" id="icon6">
                 <div class="list-items">
                     <ul>
                         <li>Temp:</li>
@@ -120,9 +120,9 @@
                         <li>Humidity:</li>
                     </ul>
                     <ul>
-                        <li>74.01°</li>
-                        <li>6.67 MPH</li>
-                        <li>46 %</li>
+                        <li id="list15"></li>
+                        <li id="list16"></li>
+                        <li id="list17"></li>
                     </ul>     
                 </div>
             </div>
