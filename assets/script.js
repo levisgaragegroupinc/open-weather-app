@@ -69,7 +69,6 @@ var myWeatherData;
 // var apiKey = myApiKeys.openWeatherApiToken;
 var apiKey = 'f92ad4f9215ca6d1f087deb61f40e189'
 var cityName;
-var latLongData;
 var cityLat;
 var cityLon;
 var degreeLabel = ' °F';
@@ -85,16 +84,17 @@ $('#city-search-button').click(function(event){
         console.log("No city name entered");
         return;
     };
-    // Capitalization correction.
-    // inputCityName.toLowerCase();
-    // console.log(inputCityName);
-    // var cityName = inputCityName.split(" ");
+    
+    // Normalize city name casing.
+    var normalizeCityName = cityName.toLowerCase();
+    console.log(normalizeCityName);
+    var splitName = normalizeCityName.split(' ');
+    for (i = 0; i < splitName.length; i++) {
+        splitName[i] = splitName[i][0].toUpperCase() + splitName[i].substr(1);
+    }
 
-    // for (let i = 0; i < cityName.length; i++) {
-    //     cityName[i] = cityName[i][0].toUpperCase() + cityName[i].substr(1);
-    // }
-
-    // cityName.join(" ");
+    splitName.join(' ');
+    cityName = splitName;
 
     // Remove search name from input field.
     document.getElementById('city-search-input').value = '';
@@ -198,7 +198,6 @@ function printWeatherData() {
     uvIndex.setAttribute('data-index', scaleColor);
     icon1.src = 'https://openweathermap.org/img/wn/' + myWeatherData.current.weather[0].icon + '.png';
 
-    // Five day content
     // Forecast day 1
     list3.append(myWeatherData.daily[0].temp.day + degreeLabel);
     list4.append(myWeatherData.daily[0].wind_speed + mphLabel);
@@ -219,14 +218,13 @@ function printWeatherData() {
     list13.append(myWeatherData.daily[3].wind_speed + mphLabel);
     list14.append(myWeatherData.daily[3].humidity + humdityLabel);
     icon5.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[3].weather[0].icon + '.png';
-
     // Forecast day 5
     list15.append(myWeatherData.daily[4].temp.day + degreeLabel);
     list16.append(myWeatherData.daily[4].wind_speed + mphLabel);
     list17.append(myWeatherData.daily[4].humidity + humdityLabel);
     icon6.src = 'https://openweathermap.org/img/wn/' + myWeatherData.daily[4].weather[0].icon + '.png';
 
-    // Show container
+    // Show weather container
     weatherResultsContainer.setAttribute('data-visible', 'yes');
 
 };
@@ -268,9 +266,6 @@ function printFavoriteCities() {
             createButton.setAttribute('data-favorite', favoriteCities[i]);
             createButton.textContent = favoriteCities[i];
             cityFavorites.appendChild(createButton);
-            // Call the print weather data function.
-            // printWeatherData();
-
         } 
     }  
 };
