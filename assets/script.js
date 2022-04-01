@@ -2,21 +2,6 @@
 var currentDateTime = moment();
 var currentDate = (currentDateTime.format('ddd MMM Do'));
 
-var forecastDay1 = moment().add(1, 'days');
-formatForecastDay1 = (forecastDay1.format('ddd MMM Do'));
-
-var forecastDay2 = moment().add(2, 'days');
-formatForecastDay2 = (forecastDay2.format('ddd MMM Do'));
-
-var forecastDay3 = moment().add(3, 'days');
-formatForecastDay3 = (forecastDay3.format('ddd MMM Do'));
-
-var forecastDay4 = moment().add(4, 'days');
-formatForecastDay4 = (forecastDay4.format('ddd MMM Do'));
-
-var forecastDay5 = moment().add(5, 'days');
-formatForecastDay5 = (forecastDay5.format('ddd MMM Do'));
-
 // Search and other variables.
 var citySearchButton = document.querySelector('#search-for-city');
 var cityFavorites = document.querySelector('.city-favorites');
@@ -101,19 +86,16 @@ $('#city-search-button').click(function(event){
     // Append city to and todays date to weather card.
     var cityNameAndCurrentDate = cityName + ' ' + '(' + currentDate + ')' ;
     currentCityDate.textContent = cityNameAndCurrentDate;
-    // Clear forecast date content
+    // Clear forecast date content and append new date
     for (i = 1; i < 6; i++) {
         var dateId = 'forecastDay' + [i];
         var forecastDateItem = document.getElementById(dateId);        
         forecastDateItem.textContent = '';
+        // Append new dates
+        var forecastDay = moment().add([i], 'days');
+        var forecastFormat = (forecastDay.format('ddd MMM Do'));
+        forecastDateItem.textContent = forecastFormat;
     };
-
-    // Append forecast dates to cards
-    forecast1.append(formatForecastDay1);
-    forecast2.append(formatForecastDay2);
-    forecast3.append(formatForecastDay3);
-    forecast4.append(formatForecastDay4);
-    forecast5.append(formatForecastDay5);
 
     // call the get lat long function.
     getlatLong(cityName, apiKey);
